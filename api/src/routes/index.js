@@ -1,6 +1,5 @@
 const { Router } = require('express');
 
-const { macaco } = require('../Controllers/ActivityControllers');
 const { getAllCountries, getIdCountry } = require('../Controllers/CountryControllers');
 
 // Importar todos los routers;
@@ -12,7 +11,6 @@ const router = Router();
 router.get("/countries", getAllCountries);
 router.get("/countries/:id", getIdCountry)
 
-router.get("/activities", macaco)
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);

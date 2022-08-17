@@ -56,10 +56,31 @@ const datoFullCountry = await Country.findAll({
   return  datoFullCountry;
 }
 
+// [ ] GET /countries/{idPais}:
+
+const getIdCountry = async(req, res) =>{
+  try {
+
+    const {id} = req.params;
+
+    const idCountry = await Country.findByPk(id.toUpperCase(), {
+        attributes: ["id", "name", "image", "continent", "capital", "subRegion", "area", "population"],
+        include: Activity
+    })
+    idCountry
+    ? res.send(idCountry)
+    : res.send("El pais ingresado no existe")
+  } catch (error) {
+    res.send(error)
+  }
+}
+
 // [ ] GET /countries?name="..."
 
  const getAllCountries = async (req, res) =>{
+
    const {name} = req.query
+   
    const allCountries = await getInfoApi()
 
     if(name){
@@ -73,45 +94,6 @@ const datoFullCountry = await Country.findAll({
         res.status(200).json(allCountries)
     }
 }
-
-
-// [ ] GET /countries/{idPais}:
-
-const getIdCountry = async(req, res) =>{
-  try {
-    const {id} = req.params;
-    const idCountry = await Country.findByPk(id.toUpperCase(), {
-        attributes: ["id", "name", "image", "continent", "capital", "subRegion", "area", "population"],
-        include: Activity
-    })
-    idCountry
-    ? res.send(idCountry)
-    : res.send("El pais ingresado no existe")
-  } catch (error) {
-    res.send(error)
-  }
-}
-
-// [ ] POST /activities:
-
-// const postActivity = async (req, res) => {
-//   const {name , difficulty, duration, season} = req.body
-//   const newCreateActivity = await Country.create({
-//     name,
-//     difficulty,
-//     duration,
-//     season,
-//   })
-
-//   const actividad = await Activity.findAll({
-//     where:{
-//         name: 
-//     }
-//   })
-// }
-
-
-
 
 module.exports = {
     getInfoApi,
