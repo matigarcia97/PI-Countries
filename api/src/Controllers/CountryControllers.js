@@ -64,7 +64,7 @@ const getIdCountry = async(req, res) =>{
     const {id} = req.params;
 
     const idCountry = await Country.findByPk(id.toUpperCase(), {
-        attributes: ["id", "name", "image", "continent", "capital", "subRegion", "area", "population"],
+        attributes: ["id"],
         include: Activity
     })
     idCountry
