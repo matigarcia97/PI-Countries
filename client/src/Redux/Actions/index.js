@@ -15,9 +15,9 @@ export function getAllCountries(){
 export function getCountryName(name) {
     return async function(dispatch){
         try {
-            const countryName = await axios.get(`http://localhost:3001/countries?name=${name}`)
+            const countryName = await axios.get("http://localhost:3001/countries?name=" + name)
             return dispatch({
-                type: "'GET_COUNTRY_NAME",
+                type: "GET_NAME",
                 payload: countryName.data,
             })
         } catch (error) {
@@ -29,10 +29,10 @@ export function getCountryName(name) {
 export function getCountryDetail(id){
     return async function(dispatch){
         try {
-            const countryDetail = await axios.get(`http://localhost:3001/countries/${id}`)
+            const json = await axios.get(`http://localhost:3001/countries/${id}`)
             return dispatch({
                 type: "GET_COUNTRY_DETAIL",
-                payload: countryDetail.data,
+                payload: json.data,
             })
         } catch (error) {
             console.log(error);
@@ -42,7 +42,7 @@ export function getCountryDetail(id){
 
 export function postCountryActivity(payload){
     return async function (dispatch){
-        const response = await axios.post("http://localhost:3001/countries", payload)
+        const response = await axios.post("http://localhost:3001/activities", payload)
         return dispatch({
            type: "POST_COUNTRY_ACTIVITY",
            payload: response.data,
@@ -50,25 +50,36 @@ export function postCountryActivity(payload){
     }
 }
 
+export function getActivities(){
+    return async function(dispatch){
+        return axios.get("http://localhost:3001/activities")
+        .then((respuesta)=>{
+            dispatch({
+                type: "GET_ACTIVITY",
+                payload: respuesta.data,
+            })
+        })
+    }
+}
 
 export function filterByContinent(payload){
   return {
     type: "FILTRAR_POR_CONTINENTE",
-    payload,
+    payload
   }
 }
 
 export function filterByActivityTour(payload){
     return {
         type: "FILTRAR_POR_ACTIVIDAD_TURISTICA",
-        payload,
+        payload
     }
 }
 
-export function orderByContinentAscDesc(payload){
+export function orderByName(payload){
   return {
-     type: "ORDENAR_CONTINENTE_ASC_DESC",
-     payload,
+     type: "ORDER_NAME",
+     payload
   }
 }
 

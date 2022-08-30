@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { getCountryName } from '../../Redux/Actions/index.js'
 import { useState } from 'react'
 
-export default function SearchBar() {
+export default function SearchBar({setPaginaActual}) {
   const dispatch = useDispatch()
   const [name , setName] = useState('')
 
@@ -18,25 +18,26 @@ export default function SearchBar() {
     e.preventDefault()
     dispatch(getCountryName(name))
     setName('')
+    setPaginaActual(1)
   }
 
   return (
-    <div className='search'>
+    <div >
         <div>
-          <Link to="/"><button>Inicio</button></Link>
+          <Link to="/"><button className='inicio_boton'>Inicio</button></Link>
 
           <input 
             className='busqueda'
             value={name}
             type='text' 
-            placeholder="buscar razas..."
-            onChange={(e)=>handleInputChange(e)}
+            placeholder="Buscar pais..."
+            onChange={(e)=>{handleInputChange(e)}}
             >
           </input>
 
-          <button className="buscar" onClick={(e)=>handleSubmit(e)}>BUSCAR</button>
+          <button className='buscar' onClick={(e)=>{handleSubmit(e)}}>Buscar</button>
 
-          <Link to="/country/createActivity"><button>Create Activity</button></Link>
+          <Link to="/createActivity"><button className='createcountry_boton'>Create Activity</button></Link>
         </div>
         
     </div>

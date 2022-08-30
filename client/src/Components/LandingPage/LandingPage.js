@@ -12,7 +12,7 @@ export default function Login(){
 
                 <div className='division-2'>
                     <h1 className='titulo'>PI-COUNTRIES</h1>
-                    <Link to="/countries">
+                    <Link to="/home">
                      <button className='boton-ingresar'>Ingresar</button>
                     </Link>
                 </div>

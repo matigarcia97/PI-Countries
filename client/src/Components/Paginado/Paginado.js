@@ -11,16 +11,13 @@ export default function Paginado({PaisesPorPagina, allCountries, paginado}){
   }
   return(
     <nav>
-      <div>
-        <div>
-          <ul>
+         <div className="boton-1">
             {pageNumbers?.map((number) => (
-              <button key={number} onClick={() => paginado(number)}> {number} </button>
+              <button  className="link"  key={number} onClick={() => paginado(number)}> {number} </button>
             ))}
-          </ul>
         </div>
-      </div>
     </nav>
+     
   );
 }
 

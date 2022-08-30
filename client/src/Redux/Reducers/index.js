@@ -16,8 +16,8 @@ function rootReducer(state= initialState, action){
                 allCountries: action.payload,
             };
         
-        case "GET_COUNTRY_NAME":
-            return{
+        case "GET_NAME":
+            return{  
               ...state,
               countries: action.payload,
             };
@@ -26,12 +26,19 @@ function rootReducer(state= initialState, action){
             return{
                 ...state,
                 detail: action.payload,
-            }
+            };
 
         case "POST_COUNTRY_ACTIVITY":
             return{
                 ...state,
             };
+
+        case "GET_ACTIVITY":  
+            return{
+              ...state,
+              activities: action.payload,
+            };
+
         //FILTRAR POR CONTINENT -> Asia 
         case "FILTRAR_POR_CONTINENTE":
             const allCountries = state.allCountries;
@@ -49,24 +56,24 @@ function rootReducer(state= initialState, action){
             countries: FiltradoActividad,
           };
 
-        case "ORDENAR_CONTINENTE_ASC_DESC":
-            const orderName = action.payload === 'asc' ? state.countries.sort((a,b) => {
-                if(a.name > b.name) return 1;
-                if(a.name < b.name) return -1;
-                return 0;
-              }) : state.countries.sort((a,b) => {
-                if(a.name < b.name) return 1;
-                if(a.name > b.name) return -1;
-                return 0;
-              })
-            return {
-              ...state, 
-              countries: orderName
-            };
+        case "ORDER_NAME":
+          const orderName = action.payload === 'All' ? state.countries.sort((a,b) => {
+            if(a.name > b.name) return 1;
+            if(a.name < b.name) return -1;
+            return 0;
+          }) : state.countries.sort((a,b) => {
+            if(a.name < b.name) return 1;
+            if(a.name > b.name) return -1;
+            return 0;
+          })
+        return {
+          ...state, 
+          countries: orderName
+        }
 
         case "ORDENAR_POR_CANT_POBLACION":
-            const orderByPopulation =
-            action.payload === "desc" ? state.countries.sort(function (a,b) {
+            const orderByPopulation = action.payload === "desc" 
+            ? state.countries.sort(function (a,b) {
                   if (a.population > b.population) return 1;
                   if (b.population > a.population) return -1;
                   return 0;
