@@ -3,7 +3,7 @@ const {Activity, Country} = require('../db.js')
 
 // [ ] POST /activities:
 
-const postActivity = async (req, res) => {
+const postCreateActivity = async (req, res) => {
   const {name , difficulty, duration, season, countries} = req.body;
 
   const newCreateActivity = await Activity.create({
@@ -22,7 +22,7 @@ const postActivity = async (req, res) => {
     res.status(200).json("Actividad creada ")
 }
 
-const getAllActivity = async(req, res) =>{
+const getActivity = async(req, res) =>{
     try {
         const actInfo = await Activity.findAll({
             attributes: ['name'],
@@ -35,8 +35,8 @@ const getAllActivity = async(req, res) =>{
 }
 
 module.exports = {
-    postActivity,
-    getAllActivity,
+    postCreateActivity,
+    getActivity,
 }
 
 

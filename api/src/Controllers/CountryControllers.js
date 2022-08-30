@@ -56,25 +56,6 @@ const datoFullCountry = await Country.findAll({
   return  datoFullCountry;
 }
 
-// [ ] GET /countries/{idPais}:
-
-const getIdCountry = async(req, res) =>{
-  try {
-
-    const {id} = req.params;
-
-    const idCountry = await Country.findByPk(id.toUpperCase(), {
-        attributes: ["id"],
-        include: Activity
-    })
-    idCountry
-    ? res.send(idCountry)
-    : res.send("El pais ingresado no existe")
-  } catch (error) {
-    res.send(error)
-  }
-}
-
 // [ ] GET /countries?name="..."
 
  const getAllCountries = async (req, res) =>{
@@ -94,6 +75,26 @@ const getIdCountry = async(req, res) =>{
         res.status(200).json(allCountries)
     }
 }
+
+// [ ] GET /countries/{idPais}:
+
+const getIdCountry = async(req, res) =>{
+  try {
+
+    const {id} = req.params;
+
+    const idCountry = await Country.findByPk(id.toUpperCase(), {
+        attributes:['image', 'name', 'continent', 'id', 'capital', 'subRegion', 'area', 'population'],
+        include: Activity
+    })
+    idCountry
+    ? res.send(idCountry)
+    : res.send("El pais ingresado no existe")
+  } catch (error) {
+    res.send(error)
+  }
+}
+
 
 module.exports = {
     getInfoApi,
